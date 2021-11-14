@@ -25,7 +25,7 @@
 | category_id     | integer   | null: false |
 | condition_id    | integer   | null: false |
 | fee_load_id     | integer   | null: false |
-| send_from_id    | integer   | null: false |
+| prefecture_id   | integer   | null: false |
 | send_by_id      | integer   | null: false |
 | price           | integer   | null: false |
 | user            | reference | null: false, foreign_key: true |
