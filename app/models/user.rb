@@ -5,13 +5,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname, presence: true
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :kana_first_name, presence: true
-  validates :kana_last_name, presence: true
+  validates :encrypted_password, presence: true, format: {with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i }
+  validates :first_name, presence: true, format: {with: /\A[ぁ-んァ-ン一-龥]/ }
+  validates :last_name, presence: true, format: {with: /\A[ぁ-んァ-ン一-龥]/ }
+  validates :kana_first_name, presence: true, format: {with: /\A[\p{katakana}\u{30fc}]+\z/ }
+  validates :kana_last_name, presence: true, format: {with: /\A[\p{katakana}\u{30fc}]+\z/ }
   validates :birthday, presence: true
 
   has_many :products
-  has_many :purchases
+  #has_many :purchases
 
 end
