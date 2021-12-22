@@ -73,6 +73,36 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Send by can't be blank")
       end
+      it 'imageが空だと出品できない' do
+        @product.image = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Image can't be blank")
+      end
+      it '価格が空だと出品できない' do
+        @product.price = ''
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price can't be blank")
+      end
+      it '価格が半角数字入力でないと出品できない' do
+        @product.price = '３００'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price is not a number")
+      end
+      it '価格が300円未満では出品できない' do
+        @product.price = 299
+        @product.valid?
+        expect(@product.errors.full_messages).to include
+      end
+      it '価格が9_999_999円を超えると出品できない' do
+        @product.price = 10000000
+        @product.valid?
+        expect(@product.errors.full_messages).to include
+      end
+      it 'userが紐付いていなければ出品できない' do
+        @product.user = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include("User must exist")
+      end
     end
   end
 end
