@@ -131,9 +131,9 @@
       <% if @products[0] != nil %>
       <li class='list'>
        <% @products.each do |product| %>
-        <%= link_to product_path(product.id) do %>
+        <%= link_to '#' do %>
          <div class='item-img-content'>
-          <%= link_to image_tag(product.image, class: :'item-img' ) %>
+          <%= link_to image_tag(product.image, class: :'item-img' ), product_path(product.id) %>
 
           <%# 商品が売れていればsold outを表示しましょう %>
           <div class='sold-out'>
@@ -143,10 +143,10 @@
          </div>
          <div class='item-info'>
           <h3 class='item-name'>
-            <%= product.product_name %>
+            <%= link_to product.product_name, product_path(product.id) %>
           </h3>
           <div class='item-price'>
-            <span><%= product.price %>円<br><%= product.fee_load.name %></span>
+            <span><%= link_to product.price, product_path(product.id) %>円<br><%= link_to product.fee_load.name, product_path(product.id) %></span>
             <div class='star-btn'>
               <%= image_tag "star.png", class:"star-icon" %>
               <span class='star-count'>0</span>
