@@ -24,6 +24,13 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id])
+    if user_signed_in? && current_user.id == @product.user.id
+      @product = Product.find(params[:id])
+    else
+      if user_signed_in?
+        render :show
+      end
+    end
   end
 
   def update
