@@ -28,7 +28,7 @@ class ProductsController < ApplicationController
       @product = Product.find(params[:id])
     else
       if user_signed_in?
-        render :index
+        redirect_to root_path
       end
     end
   end
